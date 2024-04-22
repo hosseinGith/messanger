@@ -1,0 +1,395 @@
+@font-face {
+  font-family: vazir;
+  src: url("assets/fonts/vazir/Vazir.ttf") format("ttf");
+  src: url("assets/fonts/vazir/Vazir.woff") format("woff");
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: vazir;
+  outline: 0;
+  user-select: none;
+}
+:root {
+  --self-bg-color: #2ed373f3;
+  --friands-bg-color: #fff;
+}
+body {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: linear-gradient(0deg, #113844, #36ccf9);
+  background-size: cover;
+  background-color: black;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.04fr 0.92fr 0.06fr;
+}
+.container .header {
+  width: 100%;
+  box-shadow: 0 0 10px #000;
+}
+.container #accountSetting {
+  width: max-content;
+  padding: 0 10px;
+  height: 50px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+}
+.container .messagesCont {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  overflow-y: auto;
+}
+.container .messagesCont::-webkit-scrollbar {
+  width: 7px;
+}
+.container .messagesCont::-webkit-scrollbar-button {
+  display: none;
+}
+.container .messagesCont::-webkit-scrollbar-thumb {
+  background-color: rgb(182, 182, 182);
+}
+.container .messagesCont .item {
+  width: 100%;
+  display: flex;
+  position: relative;
+  padding: 30px 0;
+}
+.container .messagesCont .item div {
+  text-overflow: ellipsis;
+  flex-direction: column;
+  cursor: pointer;
+}
+.container .messagesCont .item div:hover {
+  opacity: 0.7;
+}
+.container .messagesCont .item div .replayMessage {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 5px 10px;
+  max-width: 100%;
+  text-wrap: nowrap;
+  scale: 0.8;
+  font-size: 14px;
+}
+.container .messagesCont .item div .replayMessage img {
+  width: 120px;
+}
+.container .messagesCont .item > div {
+  max-width: 50%;
+  display: flex;
+  overflow: hidden;
+}
+
+.container .messagesCont .item span:not(.friandName) {
+  padding: 0 10px;
+  max-width: max-content;
+  word-wrap: break-word;
+}
+
+.container .messagesCont .item span.friandName {
+  left: -10px;
+  background-color: rgba(0, 0, 0, 0.548);
+  color: #fff;
+  border-radius: 20px;
+  padding: 0 4px;
+  position: absolute;
+  scale: 0.7;
+  bottom: 5px;
+}
+.container .messagesCont .item.selfMsg {
+  justify-content: flex-start;
+}
+.container .messagesCont .item.friandsMsg {
+  justify-content: flex-end;
+}
+.container .messagesCont .item.selfMsg span:not(.friandName) {
+  background: var(--self-bg-color);
+  border-radius: 20px 0 0 20px;
+}
+.container .messagesCont .item.friandsMsg > div .replayMessage + span,
+.container .messagesCont .item.selfMsg > div .replayMessage + span {
+  display: inline-block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.container .messagesCont .item.friandsMsg > div .replayMessage {
+  background-color: #000;
+  color: #fff;
+}
+.container .messagesCont .item.friandsMsg > div span {
+  text-align: end;
+}
+
+.container .messagesCont .item.friandsMsg span:not(.friandName) {
+  color: #000;
+  background-color: var(--friands-bg-color);
+  border-radius: 0 20px 20px 0;
+}
+
+.loginParent {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  backdrop-filter: blur(2px);
+  z-index: 5;
+}
+.loginParent.hide .loginContainer > form .inputs > div:not(.roomIdInput) {
+  display: none;
+}
+.loginParent.hideAll {
+  display: none;
+}
+.loginContainer {
+  width: 100%;
+  padding: 15px;
+  max-width: 500px;
+  display: flex;
+  gap: 5vh;
+  flex-direction: column;
+  color: #fff;
+  background-color: rgba(122, 91, 91, 0.356);
+}
+.loginContainer .welComText {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.loginContainer .welComText span {
+  color: #ffffffb9;
+}
+.loginContainer > form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.loginContainer > form .inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+.loginContainer > form .inputs > div {
+  display: flex;
+  flex-direction: column;
+}
+.loginContainer > form .inputs > div label {
+  z-index: 10;
+  transform: translate(0, 100%);
+  transition: all 0.5s;
+  color: #ffffffa8;
+}
+.loginContainer > form .inputs > .userName {
+  display: none;
+}
+.loginContainer > form .inputs > .userName.active {
+  display: flex;
+}
+.loginContainer > form .inputs > div label.active {
+  transform: translate(0, 0%);
+  font-size: 13px;
+}
+.loginContainer > form .inputs > .roomIdInput {
+  display: flex;
+}
+
+.loginContainer > form .inputs > div > div {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #ffffff3a;
+}
+.loginContainer > form .inputs > div > div input {
+  width: 100%;
+  padding: 5px 20px;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  color: #fff;
+}
+.loginContainer > form .inputs > div > div button {
+  padding: 5px 10px;
+  font-size: 18px;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+}
+.loginContainer > form #submitBtn {
+  padding: 15px 20px;
+  background-color: transparent;
+  border: 0;
+  background-color: #1a1b25;
+  cursor: pointer;
+  border-radius: 10px;
+  color: #d0ad7c;
+  font-size: 16px;
+}
+.loginContainer > form .aboutAcountDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.loginContainer > form .aboutAcountDiv button {
+  text-decoration: underline;
+  background-color: transparent;
+  cursor: pointer;
+  border: 0;
+  font-size: inherit;
+  color: #d0ad7c;
+}
+.onlineUsersCont {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  backdrop-filter: blur(2px);
+}
+.onlineUsersCont.active {
+  display: flex;
+}
+.onlineUsersCont .onlineUsers {
+  width: 100%;
+  height: 400px;
+  padding: 15px;
+  max-width: 400px;
+  display: flex;
+  gap: 5vh;
+  flex-direction: column;
+  color: #fff;
+  background-color: rgba(122, 91, 91, 0.356);
+  overflow: auto;
+}
+.onlineUsersCont .onlineUsers .item {
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 7px;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+}
+.onlineUsersCont .onlineUsers .item .onlineStatus {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #000;
+}
+
+.onlineUsersCont .onlineUsers .item .onlineStatus.online {
+  background-color: green;
+}
+.onlineUsersCont .onlineUsers .item .onlineStatus.offline {
+  background-color: red;
+}
+.container #sendMessageCont {
+  width: 100%;
+  display: flex;
+  border-radius: 20px;
+  background-color: #fff;
+  position: relative;
+  z-index: 1;
+  position: fixed;
+  bottom: 10px;
+  overflow: hidden;
+}
+.container #sendMessageCont input {
+  width: 100%;
+  padding: 5px 10px;
+  background-color: transparent;
+}
+.container #sendMessageCont button {
+  padding: 5px 20px;
+  font-size: 20px;
+  border: 0;
+  color: #611375;
+  background-color: transparent;
+}
+.container #sendMessageCont .replayCont {
+  position: fixed;
+  width: 80%;
+  left: 50%;
+  bottom: 56px;
+  transform: translateX(-50%);
+  background-color: #fff;
+  padding: 2px 10px;
+  display: none;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.container #sendMessageCont .replayCont.replay {
+  display: flex;
+}
+.container #sendMessageCont .replayCont i {
+  color: #2e9425f3;
+}
+.container #sendMessageCont .replayCont .messageReplayed {
+  padding: 0 20px;
+}
+.container #sendMessageCont .replayCont .messageReplayed img {
+  width: 100%;
+  max-width: 150px;
+  text-align: center;
+}
+.container .imgOpenCont {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0000006b;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  backdrop-filter: blur(5px);
+}
+.container .imgOpenCont.active {
+  display: flex;
+}
+.container .imgOpenCont > button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  border: 0;
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.container .imgOpenCont .imgCont {
+  width: 90%;
+  max-width: 1860px;
+}
+.container .imgOpenCont .imgCont img {
+  width: 100%;
+}
+#upload_image {
+  display: none;
+}
